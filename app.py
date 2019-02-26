@@ -1,4 +1,5 @@
-
+from db import users
+from user import User
 
 class Menu():
     def display_menu(self):
@@ -6,9 +7,9 @@ class Menu():
         while command != "q":
             command = input("Enter 'r' to register 'l' to login and 'q' to quit: ")
             if command == "r":
-                print("register")
+                self.register()
             elif command == "l":
-                print("login")
+                self.login()
             elif command == "q":
                 print("programm quited")
 
@@ -31,4 +32,19 @@ class Menu():
         new_person = User(name,password,id)
 
         users[id] = new_person
-        print(users[id])        
+        print(users[id])   
+
+
+
+    def login(self):
+        name = input("Enter login name: ")
+        password = input("Enter login password: ")
+
+        for user in users:
+            current_user = users[user]
+            if name == current_user.name and password == current_user.password:
+                    print("login successfully.", name)
+                    return
+        
+        print('user doesent exist or wrong password')
+        return     
